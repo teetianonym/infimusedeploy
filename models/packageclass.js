@@ -1,19 +1,10 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class PackageClass extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  PackageClass.init({
+"use strict";
+const { DataTypes } = require("sequelize");
+const db = require("../config/db");
+
+const PackageClass = db.define(
+  "PackageClass",
+  {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     posterUrl: DataTypes.STRING,
@@ -23,10 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     capacityStatus: DataTypes.BOOLEAN,
     ageGroup: DataTypes.STRING,
     ageMin: DataTypes.INTEGER,
-    ageMax: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'PackageClass',
-  });
-  return PackageClass;
+    ageMax: DataTypes.INTEGER,
+    hostId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {}
+);
+PackageClass.associate = function (models) {
+  PackageClass.belongsTo(models.Host);
 };
+module.exports = PackageClass;
