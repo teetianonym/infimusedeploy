@@ -1,7 +1,9 @@
 const express = require("express");
-const dotenv = require("dotenv").config();
-const app = express();
+const dotenv = require("dotenv");
 const cors = require("cors");
+
+const app = express();
+dotenv.config();
 
 const corsOption = {
   origin: "*",
