@@ -24,5 +24,7 @@ const PackageClass = db.define(
 );
 PackageClass.associate = function (models) {
   PackageClass.belongsTo(models.Host, { foreignKey: "hostId" });
+  PackageClass.hasMany(models.PackageTicket);
+  PackageClass.hasMany(models.PackageSession);
 };
 module.exports = PackageClass;

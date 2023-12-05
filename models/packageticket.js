@@ -16,11 +16,18 @@ const PackageTicket = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    packageClassId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {}
 );
 PackageTicket.associate = function (models) {
   PackageTicket.belongsTo(models.Customer, { foreignKey: "customerId" });
+  PackageTicket.belongsTo(models.PackageClass, {
+    foreignKey: "packageClassId",
+  });
   PackageTicket.belongsTo(models.Guest, { foreignKey: "guestId" });
 };
 module.exports = PackageTicket;
