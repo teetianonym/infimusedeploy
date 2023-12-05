@@ -54,6 +54,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      classSessionId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
