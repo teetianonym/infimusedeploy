@@ -50,6 +50,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      hostId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,

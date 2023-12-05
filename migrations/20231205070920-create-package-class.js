@@ -50,6 +50,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      hostId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     });
   },
   async down(queryInterface, Sequelize) {

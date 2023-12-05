@@ -1,55 +1,56 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Workshops', {
+    await queryInterface.createTable("Workshops", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       posterUrl: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       duration: {
-        type: Sequelize.TIME
+        type: Sequelize.TIME,
       },
       capacity: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       price: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
       },
       capacityStatus: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       ageGroup: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       ageMin: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       ageMax: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
+      HostId: { type: Sequelize.INTEGER, allowNull: false },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Workshops');
-  }
+    await queryInterface.dropTable("Workshops");
+  },
 };
