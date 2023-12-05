@@ -11,12 +11,17 @@ const ClassTicket = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    guestId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {}
 );
 
 ClassTicket.associate = (models) => {
   ClassTicket.belongsTo(models.Customer, { foreignKey: "customerId" });
+  ClassTicket.belongsTo(models.Guest, { foreignKey: "guestId" });
 };
 
 module.exports = ClassTicket;

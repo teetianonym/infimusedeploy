@@ -12,10 +12,15 @@ const PackageTicket = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    guestId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {}
 );
 PackageTicket.associate = function (models) {
   PackageTicket.belongsTo(models.Customer, { foreignKey: "customerId" });
+  PackageTicket.belongsTo(models.Guest, { foreignKey: "guestId" });
 };
 module.exports = PackageTicket;

@@ -10,10 +10,15 @@ const PaymentTransaction = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    guestId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {}
 );
 PaymentTransaction.associate = function (models) {
   PaymentTransaction.belongsTo(models.Customer, { foreignKey: "customerId" });
+  PaymentTransaction.belongsTo(models.Guest, { foreignKey: "guestId" });
 };
 module.exports = PaymentTransaction;

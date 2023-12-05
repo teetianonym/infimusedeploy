@@ -11,10 +11,15 @@ WorkshopTicket = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    guestId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {}
 );
 WorkshopTicket.associate(function (models) {
   WorkshopTicket.belongsTo(models.Customer, { foreignKey: "customerId" });
+  WorkshopTicket.belongsTo(models.Guest, { foreignKey: "guestId" });
 });
 module.exports = WorkshopTicket;
