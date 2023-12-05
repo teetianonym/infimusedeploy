@@ -42,6 +42,10 @@ module.exports = {
       ageMax: {
         type: Sequelize.INTEGER,
       },
+      hostId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -49,10 +53,6 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      },
-      hostId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
     });
   },
