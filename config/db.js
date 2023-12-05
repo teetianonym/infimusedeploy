@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const Sequelize = require("sequelize");
 
 dotenv.config();
+
 const db_name = process.env.DATABASE_NAME;
 const db_username = process.env.DATABASE_USERNAME;
 const db_password = process.env.DATABASE_PASSWORD;
