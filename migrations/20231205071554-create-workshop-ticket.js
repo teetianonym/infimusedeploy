@@ -23,7 +23,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      workshopTicketId: {
+      workshopId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      paymentTransactionId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },

@@ -23,6 +23,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      paymentTransactionId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      classTicketId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
