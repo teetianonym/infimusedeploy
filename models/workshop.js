@@ -28,6 +28,7 @@ const Workshop = db.define(
 Workshop.associate = function (models) {
   Workshop.hasMany(models.WorkshopClass);
   Workshop.hasMany(models.WorkshopTicket);
+  Workshop.hasMany(models.Location);
   Workshop.belongsTo(models.Host, { foreignKey: "hostId" });
 };
 
