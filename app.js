@@ -1,14 +1,23 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const db = require("./config/db");
 
 const app = express();
 dotenv.config();
+const port = process.env.PORT;
 
 const corsOption = {
   origin: "*",
 };
-const port = process.env.PORT;
+
+db.authenticate()
+  .then(() => {
+    console.log(`databse connected succesfull`);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.use(express.json());
 app.use(cors(corsOption));
