@@ -20,5 +20,7 @@ const PaymentTransaction = db.define(
 PaymentTransaction.associate = function (models) {
   PaymentTransaction.belongsTo(models.Customer, { foreignKey: "customerId" });
   PaymentTransaction.belongsTo(models.Guest, { foreignKey: "guestId" });
+  PaymentTransaction.hasMany(models.ClassTicket);
+  PaymentTransaction.hasMany(models.WorkshopTicket);
 };
 module.exports = PaymentTransaction;
