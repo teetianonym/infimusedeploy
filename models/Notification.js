@@ -11,10 +11,15 @@ const Notification = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    customerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {}
 );
 Notification.associate = (models) => {
   Notification.belongsTo(models.Host, { foreignKey: "hostId" });
+  Notification.belongsTo(models.Customer, { foreignKey: "customerId" });
 };
 module.exports = Notification;

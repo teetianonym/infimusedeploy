@@ -1,24 +1,20 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class workshopTicket extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  workshopTicket.init({
+"use strict";
+const { DataTypes } = require("sequelize");
+const db = require("../config/db");
+
+WorkshopTicket = db.define(
+  "WorkshopTicket",
+  {
     ticketId: DataTypes.STRING,
-    completed: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'workshopTicket',
-  });
-  return workshopTicket;
-};
+    completed: DataTypes.BOOLEAN,
+    customerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {}
+);
+WorkshopTicket.associate(function (models) {
+  WorkshopTicket.belongsTo(models.Customer, { foreignKey: "customerId" });
+});
+module.exports = WorkshopTicket;

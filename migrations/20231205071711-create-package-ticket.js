@@ -21,6 +21,10 @@ module.exports = {
       packageSessionList: {
         type: Sequelize.TEXT,
       },
+      customerId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
