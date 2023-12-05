@@ -25,6 +25,6 @@ const ClassSession = db.define(
   {}
 );
 ClassSession.associate = function (models) {
-  ClassSession.belongsTo(models.Host);
+  ClassSession.belongsTo(models.Host, { foreignKey: "hostId" });
 };
 module.exports = ClassSession;

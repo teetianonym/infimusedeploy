@@ -27,7 +27,7 @@ const Workshop = db.define(
 );
 Workshop.associate = function (models) {
   Workshop.hasMany(models.WorkshopClass);
-  Workshop.belongsTo(models.Host);
+  Workshop.belongsTo(models.Host, { foreignKey: "hostId" });
 };
 
 module.exports = Workshop;

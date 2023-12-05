@@ -23,6 +23,6 @@ const PackageClass = db.define(
   {}
 );
 PackageClass.associate = function (models) {
-  PackageClass.belongsTo(models.Host);
+  PackageClass.belongsTo(models.Host, { foreignKey: "hostId" });
 };
 module.exports = PackageClass;

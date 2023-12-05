@@ -12,12 +12,13 @@ const WorkshopClass = db.define(
     endTime: DataTypes.STRING,
     workshopId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {}
 );
 WorkshopClass.associate = function (models) {
-  WorkshopClass.belongsTo(models.Workshop);
+  WorkshopClass.belongsTo(models.Workshop, { foreignKey: "workshopId" });
 };
 
 module.exports = WorkshopClass;
