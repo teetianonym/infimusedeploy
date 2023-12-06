@@ -1,18 +1,21 @@
-const { Datatypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const db = require("./../config/db");
 
 const Waitlist = db.define(
-  "Waitlist",
+  "WaitList",
   {
-    email: DataTypes.STRING,
+    email: { type: DataTypes.STRING, unique: true },
     classSessionId: {
-      type: Datatypes.INTEGER,
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     workshopId: {
-      type: Datatypes.INTEGER,
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     packageClassId: {
-      type: Datatypes.INTEGER,
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {}

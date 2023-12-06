@@ -2,7 +2,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/db");
 
-WorkshopTicket = db.define(
+const WorkshopTicket = db.define(
   "WorkshopTicket",
   {
     ticketId: DataTypes.STRING,
@@ -13,7 +13,6 @@ WorkshopTicket = db.define(
     },
     guestId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
     workshopId: {
       type: DataTypes.INTEGER,
@@ -26,12 +25,12 @@ WorkshopTicket = db.define(
   },
   {}
 );
-WorkshopTicket.associate(function (models) {
+WorkshopTicket.associate = function (models) {
   WorkshopTicket.belongsTo(models.Customer, { foreignKey: "customerId" });
   WorkshopTicket.belongsTo(models.Guest, { foreignKey: "guestId" });
   WorkshopTicket.belongsTo(models.Workshop, { foreignKey: "workshopId" });
   WorkshopTicket.belongsTo(models.PaymentTransaction, {
     foreignKey: "paymentTransactionId",
   });
-});
+};
 module.exports = WorkshopTicket;

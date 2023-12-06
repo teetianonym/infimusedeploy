@@ -7,7 +7,7 @@ const PackageTicket = db.define(
     ticketId: DataTypes.STRING,
     completed: DataTypes.BOOLEAN,
     numberOfSession: DataTypes.INTEGER,
-    packageSessionList: DataTypes.ARRAY,
+    packageSessionList: DataTypes.TEXT,
     customerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
