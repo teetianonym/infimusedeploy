@@ -23,7 +23,6 @@ const ClassSession = db.define(
     },
     waitlistId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
   },
   {}
