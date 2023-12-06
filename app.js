@@ -19,7 +19,7 @@ db.authenticate()
     console.log(`databse connected succesfull`);
   })
   .catch((err) => {
-    console.log(err);
+    console.log("Error :" + err);
   });
 
 app.use(express.json());
