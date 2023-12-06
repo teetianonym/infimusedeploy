@@ -46,6 +46,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      waitlistId: Sequelize.INTEGER,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
