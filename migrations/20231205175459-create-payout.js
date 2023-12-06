@@ -2,32 +2,23 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("classTickets", {
+    await queryInterface.createTable("Payouts", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ticketId: {
+      amount: {
+        type: Sequelize.DOUBLE,
+      },
+      paymentMethod: {
         type: Sequelize.STRING,
       },
-      completed: {
+      paymentStatus: {
         type: Sequelize.BOOLEAN,
       },
-      customerId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      guestId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      paymentTransactionId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      classTicketId: {
+      hostId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -42,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("classTickets");
+    await queryInterface.dropTable("Payouts");
   },
 };

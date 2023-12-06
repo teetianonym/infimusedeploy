@@ -1,23 +1,26 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class WaitList extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  WaitList.init({
-    email: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'WaitList',
-  });
-  return WaitList;
+const { Datatypes } = require("sequelize");
+const db = require("./../config/db");
+
+const Waitlist = db.define(
+  "Waitlist",
+  {
+    email: DataTypes.STRING,
+    classSessionId: {
+      type: Datatypes.INTEGER,
+    },
+    workshopId: {
+      type: Datatypes.INTEGER,
+    },
+    packageClassId: {
+      type: Datatypes.INTEGER,
+    },
+  },
+  {}
+);
+Waitlist.associate = (models) => {
+  Waitlist.belongsTo(models.ClassSession, { foreignKey: "classSessionId" });
+  Waitlist.belongsTo(models.Workshop, { foreignKey: "workshopId" });
+  Waitlist.belongsTo(models.PackageClass, { foreignKey: "packageClassId" });
 };
+
+module.exports = Waitlist;

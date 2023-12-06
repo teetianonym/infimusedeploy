@@ -1,31 +1,47 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('workshopTickets', {
+    await queryInterface.createTable("workshopTickets", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       ticketId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       completed: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+      },
+      customerId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      guestId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      workshopId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      paymentTransactionId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('workshopTickets');
-  }
+    await queryInterface.dropTable("workshopTickets");
+  },
 };

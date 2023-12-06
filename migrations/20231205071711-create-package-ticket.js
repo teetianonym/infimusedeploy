@@ -21,6 +21,22 @@ module.exports = {
       packageSessionList: {
         type: Sequelize.TEXT,
       },
+      customerId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      guestId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      PackageClassId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      paymentTransactionId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -21,10 +21,17 @@ const ClassSession = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    waitlistId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {}
 );
 ClassSession.associate = function (models) {
-  ClassSession.belongsTo(models.Host);
+  ClassSession.hasMany(models.ClassTicket);
+  ClassSession.hasMany(models.Location);
+  ClassSession.hasOne(models.Waitlist, { foreignKey: "waitlistID" });
+  ClassSession.belongsTo(models.Host, { foreignKey: "hostId" });
 };
 module.exports = ClassSession;
