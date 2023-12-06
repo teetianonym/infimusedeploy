@@ -19,12 +19,14 @@ const PackageClass = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    waitlistId: DataTypes.INTEGER,
   },
   {}
 );
 PackageClass.associate = function (models) {
   PackageClass.belongsTo(models.Host, { foreignKey: "hostId" });
   PackageClass.hasMany(models.PackageTicket);
+  PackageClass.hasOne(models.Waitlist, { foreignKey: "waitlistId" });
   PackageClass.hasMany(models.PackageSession);
 };
 module.exports = PackageClass;

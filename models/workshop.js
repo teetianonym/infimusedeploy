@@ -22,6 +22,7 @@ const Workshop = db.define(
     ageMin: DataTypes.INTEGER,
     ageMax: DataTypes.INTEGER,
     HostId: DataTypes.INTEGER,
+    waitlistId: DataTypes.INTEGER,
   },
   {}
 );
@@ -29,6 +30,7 @@ Workshop.associate = function (models) {
   Workshop.hasMany(models.WorkshopClass);
   Workshop.hasMany(models.WorkshopTicket);
   Workshop.hasMany(models.Location);
+  Workshop.hasOne(models.Waitlist, { foreignKey: "waitlistId" });
   Workshop.belongsTo(models.Host, { foreignKey: "hostId" });
 };
 

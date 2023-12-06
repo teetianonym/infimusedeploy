@@ -20,6 +20,10 @@ const PackageTicket = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    paymentTransactionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {}
 );
@@ -29,5 +33,8 @@ PackageTicket.associate = function (models) {
     foreignKey: "packageClassId",
   });
   PackageTicket.belongsTo(models.Guest, { foreignKey: "guestId" });
+  PackageTicket.belongsTo(models.PaymenTransaction, {
+    foreignKey: "paymentTransactionId",
+  });
 };
 module.exports = PackageTicket;
