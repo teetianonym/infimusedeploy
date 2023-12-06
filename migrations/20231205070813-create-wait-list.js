@@ -11,10 +11,11 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        unique: true,
       },
       classSessionId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       workshopId: {
         type: Sequelize.INTEGER,
