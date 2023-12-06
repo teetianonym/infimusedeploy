@@ -5,6 +5,7 @@ const db = require("./config/db");
 
 const hostRoutes = require("./routes/hostRoutes");
 const classSessionRoutes = require("./routes/classSessionRoutes");
+const packageSessionRoutes = require("./routes/packageSessionRoute");
 
 const app = express();
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(cors(corsOption));
 
 app.use("/api/v1/hosts", hostRoutes);
 app.use("/api/v1/class-sessions", classSessionRoutes);
+app.use("/api/v1/package-sessions", packageSessionRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening to port ${port}`);
