@@ -48,6 +48,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       HostId: { type: Sequelize.INTEGER, allowNull: false },
+      waitlistId: Sequelize.INTEGER,
     });
   },
   async down(queryInterface, Sequelize) {
