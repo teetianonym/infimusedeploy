@@ -51,7 +51,7 @@ exports.getOneDoc = (Model, id) => async (req, res) => {
     const doc = await Model.findOne({ where: { id: req.params.id } });
 
     if (doc) {
-      res.status(200).json({ result: "updated", Data: doc });
+      res.status(200).json({ result: "Success", Data: doc });
     }
   } catch (error) {
     res.status(500).json({ Error: error });
