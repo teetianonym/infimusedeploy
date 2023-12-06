@@ -56,7 +56,6 @@ module.exports = {
       },
       waitlistId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
       },
       updatedAt: {
         allowNull: false,

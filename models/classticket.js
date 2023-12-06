@@ -5,7 +5,10 @@ const db = require("./../config/db");
 const ClassTicket = db.define(
   "ClassTicket",
   {
-    ticketId: DataTypes.STRING,
+    ticketId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     completed: DataTypes.BOOLEAN,
     customerId: {
       type: DataTypes.INTEGER,
@@ -13,7 +16,7 @@ const ClassTicket = db.define(
     },
     guestId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     paymentTransactionId: {
       type: DataTypes.INTEGER,
