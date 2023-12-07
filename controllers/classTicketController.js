@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const classTicket = require("./../models/classticket");
+const db = require("./../models");
+
+const classTicket = db.classTickets;
 
 exports.createClassTicket = factory.createDoc(classTicket);
 exports.getClassTicket = factory.getOneDoc(classTicket);

@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const WorkshopClass = require("./../models/workshopclass");
+const db = require("./../models");
+
+const WorkshopClass = db.workshopClasses;
 
 exports.createWorkshopClass = factory.createDoc(WorkshopClass);
 exports.getAllWorkshopClass = factory.getAllDocs(WorkshopClass);

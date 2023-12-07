@@ -1,32 +1,25 @@
 "use strict";
-const { DataTypes } = require("sequelize");
-const db = require("../config/db");
 
-const PackageClass = db.define(
-  "PackageClass",
-  {
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    posterUrl: DataTypes.STRING,
-    duration: DataTypes.TIME,
-    capacity: DataTypes.INTEGER,
-    price: DataTypes.DOUBLE,
-    capacityStatus: DataTypes.BOOLEAN,
-    ageGroup: DataTypes.STRING,
-    ageMin: DataTypes.INTEGER,
-    ageMax: DataTypes.INTEGER,
-    hostId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+module.exports = (sequelize, DataTypes) => {
+  const PackageClass = sequelize.define(
+    "packageClass",
+    {
+      title: DataTypes.STRING,
+      description: DataTypes.STRING,
+      posterUrl: DataTypes.STRING,
+      duration: DataTypes.TIME,
+      capacity: DataTypes.INTEGER,
+      price: DataTypes.DOUBLE,
+      capacityStatus: DataTypes.BOOLEAN,
+      ageGroup: DataTypes.STRING,
+      ageMin: DataTypes.INTEGER,
+      ageMax: DataTypes.INTEGER,
     },
-    waitlistId: DataTypes.INTEGER,
-  },
-  {}
-);
-PackageClass.associate = function (models) {
-  PackageClass.belongsTo(models.Host, { foreignKey: "hostId" });
-  PackageClass.hasMany(models.PackageTicket);
-  PackageClass.hasOne(models.Waitlist, { foreignKey: "waitlistId" });
-  PackageClass.hasMany(models.PackageSession);
+    {}
+  );
+  return PackageClass;
 };
-module.exports = PackageClass;
+// PackageClass.belongsTo(models.Host, { foreignKey: "hostId" });
+// PackageClass.hasMany(models.PackageTicket);
+// PackageClass.hasOne(models.Waitlist, { foreignKey: "waitlistId" });
+// PackageClass.hasMany(models.PackageSession);

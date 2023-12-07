@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const Notification = require("../models/Notification");
+const db = require("./../models");
+
+const Notification = db.notifications;
 
 exports.createNotification = factory.createDoc(Notification);
 exports.getNotification = factory.getOneDoc(Notification);

@@ -1,5 +1,7 @@
-const ClassSession = require("./../models/classsession");
+const db = require("./../models");
 const factory = require("./factory");
+
+const ClassSession = db.classSessions;
 
 exports.createClassSession = factory.createDoc(ClassSession);
 exports.getAllClassSession = factory.getAllDocs(ClassSession);

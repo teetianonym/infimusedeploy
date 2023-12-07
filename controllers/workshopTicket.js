@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const WorkshopTicket = require("./../models/workshopticket");
+const db = require("./../models");
+
+const WorkshopTicket = db.workshopTickets;
 
 exports.createWorkshopTicket = factory.createDoc(WorkshopTicket);
 exports.getWorkshopTicket = factory.getOneDoc(WorkshopTicket);

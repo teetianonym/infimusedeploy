@@ -1,5 +1,7 @@
-const PackageClass = require("./../models/packageclass");
 const factory = require("./factory");
+const db = require("./../models");
+
+const PackageClass = db.packageClasses;
 
 exports.createPackageClass = factory.createDoc(PackageClass);
 exports.getAllPackageClass = factory.getAllDocs(PackageClass);

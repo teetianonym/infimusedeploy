@@ -1,5 +1,6 @@
-const Host = require("./../models/host");
 const factory = require("./factory");
+const db = require("./../models");
+const Host = db.hosts;
 
 exports.createHost = factory.createDoc(Host);
 exports.getAllHost = factory.getAllDocs(Host);

@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const PaymentTransaction = require("./../models/paymenttransaction");
+const db = require("./../models");
+
+const PaymentTransaction = db.paymentTransactions;
 
 exports.createPaymentTransaction = factory.createDoc(PaymentTransaction);
 exports.getPaymentTransaction = factory.getOneDoc(PaymentTransaction);

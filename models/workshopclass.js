@@ -1,24 +1,18 @@
 "use strict";
-const { DataTypes } = require("sequelize");
-const db = require("./../config/db");
 
-const WorkshopClass = db.define(
-  "WorkshopClass",
-  {
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    date: DataTypes.DATE,
-    startTime: DataTypes.STRING,
-    endTime: DataTypes.STRING,
-    workshopId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+module.exports = (sequelize, DataTypes) => {
+  const WorkshopClass = sequelize.define(
+    "workshopClass",
+    {
+      title: DataTypes.STRING,
+      description: DataTypes.STRING,
+      date: DataTypes.DATE,
+      startTime: DataTypes.STRING,
+      endTime: DataTypes.STRING,
     },
-  },
-  {}
-);
-WorkshopClass.associate = function (models) {
-  WorkshopClass.belongsTo(models.Workshop, { foreignKey: "workshopId" });
+    {}
+  );
+  return WorkshopClass;
 };
 
-module.exports = WorkshopClass;
+//  WorkshopClass.belongsTo(models.Workshop, { foreignKey: "workshopId" });
