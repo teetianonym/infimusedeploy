@@ -1,43 +1,50 @@
-'use strict';
+const dotenv = require("dotenv");
+const { Sequelize, DataTypes } = require("sequelize");
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
+dotenv.config();
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+const db_name = process.env.DATABASE_NAME;
+const db_username = process.env.DATABASE_USERNAME;
+const db_password = process.env.DATABASE_PASSWORD;
+const db_host = process.env.DATABASE_HOST;
+const db_dialect = process.env.DATABASE_DIALECT;
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+const sequelize = new Sequelize(db_name, db_username, db_password, {
+  host: db_host,
+  dialect: db_dialect,
 });
 
-db.sequelize = sequelize;
+sequelize
+  .authenticate()
+  .then(() => console.log("database connected"))
+  .catch((err) => console.log(err));
+
+const db = {};
+
 db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+db.classSessions = require("./classsession")(sequelize, DataTypes);
+db.classTickets = require("./classticket")(sequelize, DataTypes);
+db.customers = require("./customer")(sequelize, DataTypes);
+db.guests = require("./guest")(sequelize, DataTypes);
+db.hosts = require("./host")(sequelize, DataTypes);
+db.locations = require("./location")(sequelize, DataTypes);
+db.notifications = require("./Notification")(sequelize, DataTypes);
+db.packageClasses = require("./packageclass")(sequelize, DataTypes);
+db.packageSessions = require("./packagesession")(sequelize, DataTypes);
+db.packageTickets = require("./packageticket")(sequelize, DataTypes);
+db.paymentTransactions = require("./paymenttransaction")(sequelize, DataTypes);
+db.payouts = require("./payout")(sequelize, DataTypes);
+db.reviewComments = require("./reviewcomment")(sequelize, DataTypes);
+db.waitlists = require("./waitlist")(sequelize, DataTypes);
+db.workshops = require("./workshop")(sequelize, DataTypes);
+db.workshopClasses = require("./workshopclass")(sequelize, DataTypes);
+db.workshopTickets = require("./workshopticket")(sequelize, DataTypes);
+
+db.sequelize
+  .sync({ force: false })
+  .then(() => console.log(`Database synced`))
+  .catch((err) => console.log(err));
 
 module.exports = db;

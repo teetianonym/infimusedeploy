@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const ReviewComment = require("./../models/reviewcomment");
+const db = require("./../models");
+
+const ReviewComment = db.reviewComments;
 
 exports.createReviewComment = factory.createDoc(ReviewComment);
 exports.getReviewComment = factory.getOneDoc(ReviewComment);

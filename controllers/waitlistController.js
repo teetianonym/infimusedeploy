@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const Waitlist = require("./../models/waitlist");
+const db = require("./../models");
+
+const Waitlist = db.waitlists;
 
 exports.createWaitlist = factory.createDoc(Waitlist);
 exports.getWaitlist = factory.getOneDoc(Waitlist);

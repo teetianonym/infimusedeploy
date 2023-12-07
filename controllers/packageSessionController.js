@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const PackageSession = require("./../models/packagesession");
+const db = require("./../models");
+
+const PackageSession = db.packageSessions;
 
 exports.createPackageSession = factory.createDoc(PackageSession);
 exports.getAllPackageSessions = factory.getAllDocs(PackageSession);

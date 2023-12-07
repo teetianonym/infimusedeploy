@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const Guest = require("./../models/guest");
+// const Guest = require("./../models/guest");
+const db = require("./../models");
+const Guest = db.guests;
 
 exports.createGuest = factory.createDoc(Guest);
 exports.getGuest = factory.getOneDoc(Guest);

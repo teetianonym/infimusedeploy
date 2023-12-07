@@ -1,4 +1,4 @@
-const { Model } = require("sequelize");
+// const { Model } = require("sequelize");
 
 // createDoc
 exports.createDoc = (Model) => async (req, res) => {
@@ -7,12 +7,13 @@ exports.createDoc = (Model) => async (req, res) => {
     console.log("req.body :" + req.body);
     res.status(200).json({ status: "Document created successful", doc });
   } catch (error) {
+    console.log(error);
     if (error.name === "SequelizeValidationError") {
       res
         .status(400)
         .json({ status: "Validation error", errors: error.errors });
     } else {
-      res.status(500).json({ status: "Internal Server Error", error });
+      // res.status(500).json({ status: "Internal Server Error", error });
     }
   }
 };

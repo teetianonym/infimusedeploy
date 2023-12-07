@@ -1,19 +1,15 @@
 "use strict";
-const { DataTypes } = require("sequelize");
-const db = require("../config/db");
-const ReviewComment = db.define(
-  "ReviewComment",
-  {
-    content: DataTypes.STRING,
-    rating: DataTypes.DECIMAL,
-    hostId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+module.exports = (sequelize, DataTypes) => {
+  const ReviewComment = sequelize.define(
+    "reviewComment",
+    {
+      content: DataTypes.STRING,
+      rating: DataTypes.DECIMAL,
     },
-  },
-  {}
-);
-ReviewComment.associate = (models) => {
-  ReviewComment.belongsTo(models.Host, { foreignKey: "hostId" });
+    {}
+  );
+
+  return ReviewComment;
 };
-module.exports = ReviewComment;
+
+// ReviewComment.belongsTo(models.Host, { foreignKey: "hostId" });

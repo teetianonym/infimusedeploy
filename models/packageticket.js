@@ -1,40 +1,25 @@
 "use strict";
-const { DataTypes } = require("sequelize");
-const db = require("../config/db");
-const PackageTicket = db.define(
-  "PackageTicket",
-  {
-    ticketId: DataTypes.STRING,
-    completed: DataTypes.BOOLEAN,
-    numberOfSession: DataTypes.INTEGER,
-    packageSessionList: DataTypes.TEXT,
-    customerId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+
+module.exports = (sequelize, DataTypes) => {
+  const PackageTicket = sequelize.define(
+    "packageTicket",
+    {
+      ticketId: DataTypes.STRING,
+      completed: DataTypes.BOOLEAN,
+      numberOfSession: DataTypes.INTEGER,
+      packageSessionList: DataTypes.TEXT,
     },
-    guestId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    packageClassId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    paymentTransactionId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-  },
-  {}
-);
-PackageTicket.associate = function (models) {
-  PackageTicket.belongsTo(models.Customer, { foreignKey: "customerId" });
-  PackageTicket.belongsTo(models.PackageClass, {
-    foreignKey: "packageClassId",
-  });
-  PackageTicket.belongsTo(models.Guest, { foreignKey: "guestId" });
-  PackageTicket.belongsTo(models.PaymenTransaction, {
-    foreignKey: "paymentTransactionId",
-  });
+    {}
+  );
+
+  return PackageTicket;
 };
-module.exports = PackageTicket;
+
+// PackageTicket.belongsTo(models.Customer, { foreignKey: "customerId" });
+// PackageTicket.belongsTo(models.PackageClass, {
+//   foreignKey: "packageClassId",
+// });
+// PackageTicket.belongsTo(models.Guest, { foreignKey: "guestId" });
+// PackageTicket.belongsTo(models.PaymenTransaction, {
+//   foreignKey: "paymentTransactionId",
+// });

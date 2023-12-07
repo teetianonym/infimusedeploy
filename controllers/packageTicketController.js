@@ -1,5 +1,7 @@
 const factory = require("./factory");
-const PackageTicket = require("./../models/packageticket");
+const db = require("./../models");
+
+const PackageTicket = db.packageTickets;
 
 exports.createPackageTicket = factory.createDoc(PackageTicket);
 exports.getPackageTicket = factory.getOneDoc(PackageTicket);

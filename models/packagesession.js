@@ -1,24 +1,18 @@
 "use strict";
-const { DataTypes } = require("sequelize");
-const db = require("../config/db");
-
-const PackageSession = db.define(
-  "PackageSession",
-  {
-    startTime: DataTypes.STRING,
-    endTime: DataTypes.STRING,
-    capacity: DataTypes.INTEGER,
-    date: DataTypes.DATE,
-    packageClassId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+module.exports = (sequelize, DataTypes) => {
+  const PackageSession = sequelize.define(
+    "packageSession",
+    {
+      startTime: DataTypes.STRING,
+      endTime: DataTypes.STRING,
+      capacity: DataTypes.INTEGER,
+      date: DataTypes.DATE,
     },
-  },
-  {}
-);
-PackageSession.associate = function (models) {
-  PackageSession.belongsTo(models.PackageClass, {
-    foreignKey: "packageClassId",
-  });
+    {}
+  );
+
+  return PackageSession;
 };
-module.exports = PackageSession;
+
+// PackageSession.belongsTo(models.PackageClass, {
+// foreignKey: "packageClassId",
