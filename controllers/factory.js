@@ -22,7 +22,20 @@ exports.createDoc = (Model) => async (req, res) => {
 
 exports.getAllDocs = (Model) => async (req, res) => {
   try {
-    const docs = await Model.findAll();
+    // paginate
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 10;
+    const offset = (page - 1) * limit;
+    // sorting
+    const sortFields = ["name", "price"];
+    const sortBy = req.query.sort;
+    const order = sortFields.includes(sortBy) ? sortBy : "createdAt";
+
+    const docs = await Model.findAll({
+      limit: limit,
+      offset: offset,
+      order: [[order, "DESC"]],
+    });
     res
       .status(200)
       .json({ result: "Success", TotalDocs: docs.length, Document: docs });
@@ -55,6 +68,7 @@ exports.getOneDoc = (Model, id) => async (req, res) => {
       res.status(200).json({ result: "Success", Data: doc });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ Error: error });
   }
 };
