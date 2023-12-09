@@ -6,18 +6,18 @@ const ClassTicket = db.classTickets;
 const PackageSession = db.packageSessions;
 
 exports.createCustomer = factory.createDoc(Customer);
-// exports.getCustomer = factory.getOneDoc(Customer);
 exports.getAllCustomers = factory.getAllDocs(Customer);
 exports.updateCustomer = factory.updateDoc(Customer);
 exports.deleteCustomer = factory.deleteDoc(Customer);
 
 exports.getCustomer = async (req, res) => {
+  const customerId = req.params.id;
   try {
-    const doc = await Customer.findByPk(req.params.id, {
+    const doc = await Customer.findByPk(customerId, {
       include: [
         {
           model: PackageSession,
-
+          where: { customerId: customerId }, // Use the correct equality operator and field
           as: "packageSession",
           attributes: ["startTime"],
         },
