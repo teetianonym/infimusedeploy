@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       startTime: DataTypes.TIME,
       endTime: DataTypes.TIME,
       capacity: DataTypes.INTEGER,
+      fullCapacity: DataTypes.INTEGER,
       capacityStatus: DataTypes.INTEGER,
       price: DataTypes.DOUBLE,
       ageGroup: DataTypes.STRING,
