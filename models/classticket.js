@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      completed: DataTypes.BOOLEAN,
+      ticketStatus: {
+        type: DataTypes.ENUM,
+        values: ["COMPLETE", "CANCELED", "ACTIVE", "REFUND"],
+      },
     },
     {}
   );

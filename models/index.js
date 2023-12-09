@@ -41,6 +41,19 @@ db.waitlists = require("./waitlist")(sequelize, DataTypes);
 db.workshops = require("./workshop")(sequelize, DataTypes);
 db.workshopClasses = require("./workshopclass")(sequelize, DataTypes);
 db.workshopTickets = require("./workshopticket")(sequelize, DataTypes);
+db.documents = require("./document")(sequelize, DataTypes);
+db.categories = require("./category")(sequelize, DataTypes);
+db.subCategories = require("./subCategory")(sequelize, DataTypes);
+db.carts = require("./cart")(sequelize, DataTypes);
+db.hostReviews = require("./hostReview")(sequelize, DataTypes);
+db.hostTotalReviews = require("./hostTotalReview")(sequelize, DataTypes);
+db.wishlists = require("./wishlist")(sequelize, DataTypes);
+db.refundTickets = require("./refundTicket")(sequelize, DataTypes);
+db.hostPlans = require("./hostPlan")(sequelize, DataTypes);
+db.hostPaymentPlanTransaction = require("./hostPaymentPlanTransaction")(
+  sequelize,
+  DataTypes
+);
 
 db.sequelize
   .sync({ force: false })
@@ -259,7 +272,7 @@ db.packageTickets.belongsTo(db.paymentTransactions, {
   foreignKey: "paymentTransactionId",
 });
 
-db.classSessions.hasOne(db.waitlists, {
+db.classSessions.hasMany(db.waitlists, {
   as: "waitlist",
   foreignKey: "classSessionId",
 });
@@ -268,7 +281,7 @@ db.waitlists.belongsTo(db.classSessions, {
   foreignKey: "classSessionId",
 });
 
-db.workshops.hasOne(db.waitlists, {
+db.workshops.hasMany(db.waitlists, {
   as: "waitlist",
   foreignKey: "workshopId",
 });
@@ -277,7 +290,7 @@ db.waitlists.belongsTo(db.workshops, {
   foreignKey: "workshopId",
 });
 
-db.packageClasses.hasOne(db.waitlists, {
+db.packageClasses.hasMany(db.waitlists, {
   as: "waitlist",
   foreignKey: "packageClassId",
 });
@@ -286,5 +299,148 @@ db.waitlists.belongsTo(db.packageClasses, {
   foreignKey: "packageClassId",
 });
 
-// waitlistbelongs to classsession
+db.hosts.hasMany(db.documents, { as: "document", foreignKey: "hostId" });
+db.documents.belongsTo(db.hosts, { as: "host", foreignKey: "hostId" });
+
+db.categories.hasMany(db.subCategories, {
+  as: "subCategory",
+  foreignKey: "categoryId",
+});
+db.subCategories.belongsTo(db.categories, {
+  as: "category",
+  foreignKey: "categoryId",
+});
+
+db.classSessions.hasMany(db.subCategories, {
+  as: "subCategory",
+  foreignKey: "classSessionId",
+});
+db.subCategories.belongsTo(db.classSessions, {
+  as: "classSession-subCategory",
+  foreignKey: "classSessionId",
+});
+
+db.classSessions.hasMany(db.categories, {
+  as: "category",
+  foreignKey: "classSessionId",
+});
+db.categories.belongsTo(db.classSessions, {
+  as: "classSession-categories",
+  foreignKey: "classSessionId",
+});
+
+db.workshops.hasMany(db.subCategories, {
+  as: "subCategory",
+  foreignKey: "workshopId",
+});
+db.subCategories.belongsTo(db.workshops, {
+  as: "classSession",
+  foreignKey: "workshopId",
+});
+
+db.workshops.hasMany(db.categories, {
+  as: "category",
+  foreignKey: "workshopId",
+});
+db.categories.belongsTo(db.workshops, {
+  as: "classSession",
+  foreignKey: "workshopId",
+});
+db.packageClasses.hasMany(db.subCategories, {
+  as: "subCategory",
+  foreignKey: "packageClassId",
+});
+db.subCategories.belongsTo(db.packageClasses, {
+  as: "packageClass",
+  foreignKey: "packageClassId",
+});
+
+db.packageClasses.hasMany(db.categories, {
+  as: "category",
+  foreignKey: "packageClassId",
+});
+db.categories.belongsTo(db.packageClasses, {
+  as: "packageClass",
+  foreignKey: "packageClassId",
+});
+db.customers.hasMany(db.wishlists, {
+  as: "wishlist",
+  foreignKey: "customerId",
+});
+db.wishlists.belongsTo(db.customers, {
+  as: "customer",
+  foreignKey: "customerId",
+});
+db.customers.hasMany(db.carts, { as: "cart", foreignKey: "customerId" });
+db.carts.belongsTo(db.customers, { as: "customer", foreignKey: "customerId" });
+
+db.customers.hasMany(db.hostReviews, {
+  as: "hostReview",
+  foreignKey: "customerId",
+});
+db.hostReviews.belongsTo(db.customers, {
+  as: "customer-hostReviews",
+  foreignKey: "customerId",
+});
+
+db.hosts.hasMany(db.hostReviews, {
+  as: "hostReview",
+  foreignKey: "hostId",
+});
+db.hostReviews.belongsTo(db.hosts, {
+  as: "customer",
+  foreignKey: "hostId",
+});
+
+db.packageSessions.belongsTo(db.customers, { through: db.packageTickets });
+db.customers.belongsTo(db.packageSessions, { through: db.packageTickets });
+
+db.classSessions.hasOne(db.wishlists, {
+  as: "wishlist",
+  foreignKey: "classSessionId",
+});
+db.wishlists.belongsTo(db.classSessions, {
+  as: "classSession",
+  foreignKey: "classSessionId",
+});
+
+db.workshops.hasOne(db.wishlists, {
+  as: "wishlist",
+  foreignKey: "workshopId",
+});
+db.wishlists.belongsTo(db.workshops, {
+  as: "workshop",
+  foreignKey: "workshopId",
+});
+
+db.packageClasses.hasOne(db.wishlists, {
+  as: "wishlist",
+  foreignKey: "packageClassId",
+});
+db.wishlists.belongsTo(db.packageClasses, {
+  as: "packageClasse",
+  foreignKey: "packageClassId",
+});
+
+db.classSessions.hasOne(db.carts, { as: "cart", foreignKey: "classSessionId" });
+db.carts.belongsTo(db.classSessions, {
+  as: "classSession",
+  foreignKey: "classSessionId",
+});
+
+db.workshops.hasOne(db.carts, { as: "cart", foreignKey: "workshopId" });
+db.carts.belongsTo(db.workshops, {
+  as: "workshop",
+  foreignKey: "workshopId",
+});
+
+db.packageClasses.hasOne(db.carts, {
+  as: "cart",
+  foreignKey: "packageClassId",
+});
+db.carts.belongsTo(db.packageClasses, {
+  as: "packageClass",
+  foreignKey: "packageClassId",
+});
+
 module.exports = db;
