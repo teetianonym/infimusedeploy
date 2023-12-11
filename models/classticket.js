@@ -3,7 +3,15 @@
 module.exports = (sequelize, DataTypes) => {
   const ClassTicket = sequelize.define(
     "ClassTicket",
+
     {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
+      },
+
       ticketId: {
         type: DataTypes.STRING,
         allowNull: false,
