@@ -1,5 +1,6 @@
 const factory = require("./factory");
 const db = require("./../models");
+const workshop = db.workshops;
 const Customer = db.customers;
 const workshopTicket = db.workshopTickets;
 const ClassTicket = db.classTickets;
@@ -17,9 +18,18 @@ exports.getCustomer = async (req, res) => {
       include: [
         {
           model: PackageSession,
-          where: { customerId: customerId }, // Use the correct equality operator and field
-          as: "packageSession",
           attributes: ["startTime"],
+          through: "packageTicket",
+        },
+        {
+          model: workshop,
+          attributes: ["title"],
+          through: "WorkshopTicket",
+        },
+        {
+          model: db.classSessions,
+          through: "WorkshopTicket",
+          attributes: ["title"],
         },
       ],
     });
