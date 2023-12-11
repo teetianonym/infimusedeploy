@@ -18,6 +18,7 @@ const packageTicketRoutes = require("./routes/packageTicketRoutes");
 const paymentTransactionRoute = require("./routes/paymentTransactionRoute");
 const payoutRoutes = require("./routes/payoutRoutes");
 const waitlistRoutes = require("./routes/waitlistRoutes");
+const hostReviewRoutes = require("./routes/hostReviewRoutes");
 const workshopTicketRoutes = require("./routes/workshopTicketRoute");
 
 const app = express();
@@ -59,6 +60,7 @@ app.use("/api/v1/review-comments", reviewCommentRoutes);
 // others
 app.use("/api/v1/locations", locationRoutes);
 app.use("/api/v1/waitlists", waitlistRoutes);
+app.use("/api/v1/host-reviews", hostReviewRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening to port ${port}`);

@@ -417,4 +417,13 @@ db.carts.belongsTo(db.packageClasses, {
   foreignKey: "packageClassId",
 });
 
+db.classSessions.hasMany(db.classTickets, {
+  as: "ClassTicket",
+  foreignKey: "sessionClassId",
+});
+db.classTickets.belongsTo(db.classSessions, {
+  as: "classSession",
+  foreignKey: "sessionClassId",
+});
+
 module.exports = db;
