@@ -23,8 +23,8 @@ exports.createDoc = (Model) => async (req, res) => {
 exports.getAllDocs = (Model) => async (req, res) => {
   try {
     // paginate
-    const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 10;
+    const page = parseInt(req.query.page, 15) || 1;
+    const limit = parseInt(req.query.limit, 15) || 15;
     const offset = (page - 1) * limit;
     // sorting
     const sortFields = ["name", "price"];

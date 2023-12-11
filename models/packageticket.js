@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
       ticketId: DataTypes.STRING,
       completed: DataTypes.BOOLEAN,
       numberOfSession: DataTypes.INTEGER,
-      packageSessionList: DataTypes.TEXT,
+      ticketStatus: {
+        type: DataTypes.ENUM,
+        values: ["COMPLETE", "CANCELED", "ACTIVE", "REFUND"],
+      },
     },
     {}
   );

@@ -5,9 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     "WorkshopTicket",
     {
       ticketId: DataTypes.STRING,
-      completed: DataTypes.BOOLEAN,
+      ticketStatus: {
+        type: DataTypes.ENUM,
+        values: ["COMPLETE", "CANCELED", "ACTIVE", "REFUND"],
+      },
     },
-    {}
+    { timestamps: false }
   );
 
   return WorkshopTicket;

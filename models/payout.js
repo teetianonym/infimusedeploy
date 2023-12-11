@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       paymentStatus: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.ENUM,
+        values: ["PENDING", "COMPLETED", "FAILED", "REFUNDED"],
       },
       createdAt: {
         allowNull: false,

@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       capacity: DataTypes.INTEGER,
       price: DataTypes.DOUBLE,
       capacityStatus: DataTypes.BOOLEAN,
+      fullCapacity: DataTypes.INTEGER,
       ageGroup: DataTypes.STRING,
       ageMin: DataTypes.INTEGER,
       ageMax: DataTypes.INTEGER,

@@ -6,7 +6,12 @@ module.exports = (sequelize, DataTypes) => {
       bio: DataTypes.STRING,
       imageUrls: DataTypes.TEXT,
       qualifications: DataTypes.STRING,
-      specialization: DataTypes.STRING,
+      verified: DataTypes.BOOLEAN,
+      hostTitle: {
+        type: DataTypes.ENUM,
+        values: ["INDIVIDUAL", "PROFESSIONAL", "BUSINESS"],
+      },
+      nationalId: DataTypes.INTEGER,
       experienceYears: DataTypes.INTEGER,
       status: DataTypes.BOOLEAN,
       email: {
