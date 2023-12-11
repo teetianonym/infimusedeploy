@@ -11,15 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM,
         values: ["COMPLETE", "CANCELED", "ACTIVE", "REFUND"],
       },
-      packageSessionList: {
-        type: DataTypes.STRING,
-        get() {
-          return this.getDataValue("packageSessionList").split(";");
-        },
-        set(val) {
-          this.setDataValue("packageSessionList", val.join(";"));
-        },
-      },
     },
     {}
   );
