@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         values: ["COMPLETE", "CANCELED", "ACTIVE", "REFUND"],
       },
     },
-    {}
+    { timestamps: false }
   );
 
   return WorkshopTicket;
