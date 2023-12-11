@@ -60,6 +60,19 @@ db.sequelize
   .then(() => console.log(`Database synced`))
   .catch((err) => console.log(err));
 
+db.packageSessions.belongsToMany(db.customers, {
+  through: "packageTicket",
+});
+db.customers.belongsToMany(db.packageSessions, {
+  through: "packageTicket",
+});
+
+db.classSessions.belongsToMany(db.customers, { through: "ClassTicket" });
+db.customers.belongsToMany(db.classSessions, { through: "ClassTicket" });
+
+db.workshops.belongsToMany(db.customers, { through: "WorkshopTicket" });
+db.customers.belongsToMany(db.workshops, { through: "WorkshopTicket" });
+
 db.workshops.hasMany(db.workshopClasses, {
   foreignKey: "workshopId",
   as: "workshopClass",
@@ -122,24 +135,6 @@ db.locations.belongsTo(db.packageClasses, {
   foreignKey: "packageClassId",
 });
 
-db.classSessions.hasMany(db.classTickets, {
-  as: "classTicket",
-  foreignKey: "classSessionId",
-});
-db.classTickets.belongsTo(db.classSessions, {
-  as: "classSession",
-  foreignKey: "classSessionId",
-});
-
-db.workshops.hasMany(db.workshopTickets, {
-  as: "workshopTicket",
-  foreignKey: "workshopId",
-});
-db.workshopTickets.belongsTo(db.workshops, {
-  as: "workshop",
-  foreignKey: "workshopId",
-});
-
 db.packageClasses.hasMany(db.packageTickets, {
   as: "packageTicket",
   foreignKey: "packageClassId",
@@ -152,29 +147,11 @@ db.packageTickets.belongsTo(db.packageClasses, {
 db.hosts.hasMany(db.payouts, { as: "payout", foreignKey: "hostId" });
 db.payouts.belongsTo(db.hosts, { as: "host", foreignKey: "hostId" });
 
-db.customers.hasMany(db.classTickets, {
-  as: "classTicket",
-  foreignKey: "customerId",
-});
-db.classTickets.belongsTo(db.customers, {
-  as: "customer",
-  foreignKey: "customerId",
-});
-
 db.customers.hasMany(db.workshopTickets, {
   as: "workshopTicket",
   foreignKey: "customerId",
 });
 db.workshopTickets.belongsTo(db.customers, {
-  as: "customer",
-  foreignKey: "customerId",
-});
-
-db.customers.hasMany(db.packageTickets, {
-  as: "packageTicket",
-  foreignKey: "customerId",
-});
-db.packageTickets.belongsTo(db.customers, {
   as: "customer",
   foreignKey: "customerId",
 });
@@ -246,7 +223,7 @@ db.paymentTransactions.belongsTo(db.guests, {
 });
 
 db.paymentTransactions.hasMany(db.classTickets, {
-  as: "classTicket",
+  as: "ClassTicket",
   foreignKey: "paymentTransactionId",
 });
 db.classTickets.belongsTo(db.paymentTransactions, {
@@ -391,9 +368,6 @@ db.hostReviews.belongsTo(db.hosts, {
   as: "customer",
   foreignKey: "hostId",
 });
-
-db.packageSessions.belongsTo(db.customers, { through: db.packageTickets });
-db.customers.belongsTo(db.packageSessions, { through: db.packageTickets });
 
 db.classSessions.hasOne(db.wishlists, {
   as: "wishlist",
