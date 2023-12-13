@@ -20,6 +20,8 @@ const payoutRoutes = require("./routes/payoutRoutes");
 const waitlistRoutes = require("./routes/waitlistRoutes");
 const hostReviewRoutes = require("./routes/hostReviewRoutes");
 const workshopTicketRoutes = require("./routes/workshopTicketRoute");
+const categoriesRoutes = require("./routes/categoryRoutes");
+// const categoriesRoutes = require("./controllers/categoryController");
 
 const app = express();
 dotenv.config();
@@ -61,6 +63,7 @@ app.use("/api/v1/review-comments", reviewCommentRoutes);
 app.use("/api/v1/locations", locationRoutes);
 app.use("/api/v1/waitlists", waitlistRoutes);
 app.use("/api/v1/host-reviews", hostReviewRoutes);
+app.use("/api/v1/categories", categoriesRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening to port ${port}`);
