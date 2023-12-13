@@ -50,6 +50,7 @@ db.hostTotalReviews = require("./hostTotalReview")(sequelize, DataTypes);
 db.wishlists = require("./wishlist")(sequelize, DataTypes);
 db.refundTickets = require("./refundTicket")(sequelize, DataTypes);
 db.hostPlans = require("./hostPlan")(sequelize, DataTypes);
+db.comments = require("./comment")(sequelize, DataTypes);
 db.hostPaymentPlanTransaction = require("./hostPaymentPlanTransaction")(
   sequelize,
   DataTypes
@@ -424,6 +425,69 @@ db.classSessions.hasMany(db.classTickets, {
 db.classTickets.belongsTo(db.classSessions, {
   as: "classSession",
   foreignKey: "sessionClassId",
+});
+
+db.workshops.hasMany(db.workshopTickets, {
+  as: "workshopTicket",
+  foreignKey: "workshopId",
+});
+db.workshopTickets.belongsTo(db.workshops, {
+  as: "workshop",
+  foreignKey: "workshopId",
+});
+
+db.packageSessions.hasMany(db.packageTickets, {
+  as: "packageTicket",
+  foreignKey: "sessionId",
+});
+db.packageTickets.belongsTo(db.packageSessions, {
+  as: "packageSession",
+  foreignKey: "sessionId",
+});
+
+db.packageSessions.hasMany(db.comments, {
+  as: "comment",
+  foreignKey: "packageSessionId",
+});
+db.comments.belongsTo(db.packageSessions, {
+  as: "packageSession",
+  foreignKey: "packageSessionId",
+});
+
+db.packageClasses.hasMany(db.comments, {
+  as: "comment",
+  foreignKey: "packageClassId",
+});
+db.comments.belongsTo(db.packageClasses, {
+  as: "packageClass",
+  foreignKey: "packageClassId",
+});
+
+db.workshops.hasMany(db.comments, {
+  as: "comment",
+  foreignKey: "workshopId",
+});
+db.comments.belongsTo(db.workshops, {
+  as: "workshop",
+  foreignKey: "workshopId",
+});
+
+db.workshopClasses.hasMany(db.comments, {
+  as: "comment",
+  foreignKey: "workshopClassId",
+});
+db.comments.belongsTo(db.workshopClasses, {
+  as: "workshopClass",
+  foreignKey: "workshopClassId",
+});
+
+db.classSessions.hasMany(db.comments, {
+  as: "comment",
+  foreignKey: "classSessionId",
+});
+db.comments.belongsTo(db.classSessions, {
+  as: "classSession",
+  foreignKey: "classSessionId",
 });
 
 module.exports = db;

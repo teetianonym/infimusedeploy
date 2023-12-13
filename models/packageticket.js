@@ -4,6 +4,12 @@ module.exports = (sequelize, DataTypes) => {
   const PackageTicket = sequelize.define(
     "packageTicket",
     {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
+      },
       ticketId: DataTypes.STRING,
       completed: DataTypes.BOOLEAN,
       numberOfSession: DataTypes.INTEGER,

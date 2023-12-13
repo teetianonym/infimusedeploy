@@ -31,10 +31,14 @@ exports.getAllDocs = (Model) => async (req, res) => {
     const sortBy = req.query.sort;
     const order = sortFields.includes(sortBy) ? sortBy : "createdAt";
 
+    // location Filter
+    const locationFilter = req.query.location;
+    const whereClause = locationFilter ? { location: locationFilter } : {};
     const docs = await Model.findAll({
       limit: limit,
       offset: offset,
       order: [[order, "DESC"]],
+      where: whereClause,
     });
     res
       .status(200)

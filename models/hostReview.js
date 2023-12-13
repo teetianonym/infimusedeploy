@@ -2,10 +2,18 @@ module.exports = (sequelize, DataTypes) => {
   const HostReview = sequelize.define(
     "hostReview",
     {
-      content: DataTypes.STRING,
-      rating: DataTypes.INTEGER,
+      content: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      rating: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-    { timestamps: true }
+    {
+      timestamps: true,
+    }
   );
 
   return HostReview;

@@ -15,7 +15,7 @@ exports.getHost = async (req, res) => {
       include: [
         {
           model: hostReview,
-          attributes: ["content", "rating"],
+          attributes: ["content", "rating", "customerId"],
           as: "hostReview",
         },
       ],
