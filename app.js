@@ -21,7 +21,13 @@ const waitlistRoutes = require("./routes/waitlistRoutes");
 const hostReviewRoutes = require("./routes/hostReviewRoutes");
 const workshopTicketRoutes = require("./routes/workshopTicketRoute");
 const categoriesRoutes = require("./routes/categoryRoutes");
-// const categoriesRoutes = require("./controllers/categoryController");
+const wishlistsRoutes = require("./routes/wishlistRoutes");
+const subCategoryRoutes = require("./routes/subCategoriesRoutes");
+const refundTicketRoutes = require("./routes/refundTicketRoutes");
+const hostTotalReviewRoutes = require("./routes/hostTotalReviewsRoutes");
+const hostPlansRoutes = require("./routes/hostPlansRoutes");
+const documentRoutes = require("./routes/documentRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 
 const app = express();
 dotenv.config();
@@ -50,6 +56,7 @@ app.use("/api/v1/guests", guestRoutes);
 app.use("/api/v1/class-tickets", classTicketRoutes);
 app.use("/api/v1/package-tickets", packageTicketRoutes);
 app.use("/api/v1/workshop-tickets", workshopTicketRoutes);
+app.use("/api/v1/refund-tickets", refundTicketRoutes);
 
 // payments
 app.use("/api/v1/payouts", payoutRoutes);
@@ -58,12 +65,24 @@ app.use("/api/v1/transactions", paymentTransactionRoute);
 // notifications and comments
 app.use("/api/v1/notifications", notificationRoutes);
 app.use("/api/v1/review-comments", reviewCommentRoutes);
+app.use("/api/v1/host-reviews", hostTotalReviewRoutes);
+
+// cart
+app.use("/api/v1/carts", cartRoutes);
+
+// categories
+app.use("/api/v1/categories", categoriesRoutes);
+app.use("/api/v1/sub-categories", subCategoryRoutes);
+
+// lists
+app.use("/api/v1/waitlists", waitlistRoutes);
+app.use("/api/v1/wishlists", wishlistsRoutes);
 
 // others
 app.use("/api/v1/locations", locationRoutes);
-app.use("/api/v1/waitlists", waitlistRoutes);
 app.use("/api/v1/host-reviews", hostReviewRoutes);
-app.use("/api/v1/categories", categoriesRoutes);
+app.use("/api/v1/hostplans", hostPlansRoutes);
+app.use("/api/v1/documents", documentRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening to port ${port}`);
