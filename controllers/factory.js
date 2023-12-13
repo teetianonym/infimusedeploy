@@ -27,7 +27,7 @@ exports.getAllDocs = (Model) => async (req, res) => {
     const limit = parseInt(req.query.limit, 15) || 15;
     const offset = (page - 1) * limit;
     // sorting
-    const sortFields = ["name", "price"];
+    const sortFields = ["location", "price"];
     const sortBy = req.query.sort;
     const order = sortFields.includes(sortBy) ? sortBy : "createdAt";
 
