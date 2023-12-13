@@ -28,6 +28,7 @@ const hostTotalReviewRoutes = require("./routes/hostTotalReviewsRoutes");
 const hostPlansRoutes = require("./routes/hostPlansRoutes");
 const documentRoutes = require("./routes/documentRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 
 const app = express();
 dotenv.config();
@@ -66,6 +67,7 @@ app.use("/api/v1/transactions", paymentTransactionRoute);
 app.use("/api/v1/notifications", notificationRoutes);
 app.use("/api/v1/review-comments", reviewCommentRoutes);
 app.use("/api/v1/host-reviews", hostTotalReviewRoutes);
+app.use("/api/v1/comments", commentRoutes);
 
 // cart
 app.use("/api/v1/carts", cartRoutes);
