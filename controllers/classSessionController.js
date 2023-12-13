@@ -4,6 +4,7 @@ const factory = require("./factory");
 const ClassSession = db.classSessions;
 const ClassTicket = db.classTickets;
 const Location = db.locations;
+const Comment = db.comments;
 
 exports.createClassSession = factory.createDoc(ClassSession);
 // exports.getAllClassSession = factory.getAllDocs(ClassSession);
@@ -21,10 +22,25 @@ exports.getAllClassSession = async (req, res) => {
     const sortBy = req.query.sort;
     const order = sortFields.includes(sortBy) ? sortBy : "createdAt";
 
+    // location Filter
+    const { location } = req.query;
+    let whereClause = {};
+    if (location) {
+      const locations = await Location.findAll({
+        where: { location },
+      });
+      const classSessionIds = locations.map(
+        (location) => location.classSessionId
+      );
+
+      whereClause = { id: classSessionIds };
+    }
+
     const docs = await ClassSession.findAll({
       limit: limit,
       offset: offset,
       order: [[order, "DESC"]],
+      where: whereClause,
     });
     res
       .status(200)
@@ -44,6 +60,20 @@ exports.getOneClassSession = async (req, res) => {
           model: Location,
           as: "location",
           attributes: ["location", "latitude", "longitude"],
+        },
+      ],
+      include: [
+        {
+          model: ClassTicket,
+          as: "ClassTicket",
+          attributes: ["ticketId"],
+        },
+      ],
+      include: [
+        {
+          model: Comment,
+          as: "comment",
+          attributes: ["comment"],
         },
       ],
     });
