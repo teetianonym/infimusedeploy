@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const customerController = require("../controllers/customerController");
+const authController = require("../controllers/authController");
 
-router
-  .route("/")
-  .get(customerController.getAllCustomers)
-  .post(customerController.createCustomer);
+router.post("/login", authController.login);
+router.post("/signup", authController.signup);
+router.route("/").get(customerController.getAllCustomers);
 
 router
   .route("/:id")
