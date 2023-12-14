@@ -1,10 +1,11 @@
 const express = require("express");
+const authController = require("./../controllers/authController");
 const router = express.Router();
 const workshopController = require("../controllers/workshopController");
 
 router
   .route("/")
-  .get(workshopController.getAllWorkshop)
+  .get(authController.protect, workshopController.getAllWorkshop)
   .post(workshopController.createWorkshop);
 
 router
