@@ -6,7 +6,6 @@ const workshopTicket = db.workshopTickets;
 const ClassTicket = db.classTickets;
 const PackageSession = db.packageSessions;
 
-exports.createCustomer = factory.createDoc(Customer);
 exports.getAllCustomers = factory.getAllDocs(Customer);
 exports.updateCustomer = factory.updateDoc(Customer);
 exports.deleteCustomer = factory.deleteDoc(Customer);
