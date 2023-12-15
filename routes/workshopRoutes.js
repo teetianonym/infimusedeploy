@@ -5,7 +5,7 @@ const workshopController = require("../controllers/workshopController");
 
 router
   .route("/")
-  .get(authController.protect, workshopController.getAllWorkshop)
+  .get(workshopController.getAllWorkshop)
   .post(workshopController.createWorkshop);
 
 router
